@@ -1,0 +1,667 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD20\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">10/15/2020</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">2:02:45 AM</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:07</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc" class="file"><acronym title="C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc">C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">105</td></tr>
+</table>
+</td>
+</table><a name="ID1IYMZWKV2LLZGITMTP4PQ5TEHKJIO1KO1EXJCMJN5N1QLNL0JVSO"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDT2RP3225XK4LNDBLXKSSPHTO4FMRRPYJVLFUUUMBX3MIQBWTTCSO">Clearance Constraint (Gap=5mil) (All),(All)</a></td>
+<td class="column2">31</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID4QY4EBPWDMRTGIFN2PQEVN24JHRUPSZMLSCSGLDKYE5G5R01ZJ1E">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">31</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDGE2V5FXVJXDENDY0Q0QNODZIQH5SO555E054FMDPKR2MEMVWRTEL">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">22</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDYMAO2SCOQEBMKQSSG0KTSXDANBDCDB3XHKF4KWI2AIIXYITPEN2E">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDRQZXGNI4MUNLPMNITO3XYQR0JBBPHBWEHLULVRHYWS3E3IJ5XM2F">Width Constraint (Min=5mil) (Max=200mil) (Preferred=25mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID3ETBYH34PPKJRASHJLMXG125BVRO2CE01U3NKEW0VEIVDZXMPXC">Power Plane Connect Rule(Relief Connect )(Expansion=20mil) (Conductor Width=20mil) (Air Gap=10mil) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDB0WUZ20UT0QFUB5ZQ5QUQC5VNY0NQJCNOUJTCDSQTTVU0XITTJN">Minimum Annular Ring (Minimum=6mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDD2BVQ5GVHXSLOJUVAEDIECBDEBK3MIHU14QJSFNP0SYZ0D0N15XO">Hole Size Constraint (Min=10mil) (Max=200mil) (All)</a></td>
+<td class="column2">2</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDQR2SAQNIHSZ0QJ3XLLHQVBADY5JW2BPAX2NUL4KH14MNMTCXVH">Hole To Hole Clearance (Gap=10mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDXFMMS5ZLEOD1JAOI0DISHB0RPOYWFGI2KTK4IAFSFRLG0R0TYUNF">Minimum Solder Mask Sliver (Gap=5mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDZ3OPDF3A5CDFDQUVEKYHL21J2ELXFD2JDAS5GBEGO1LD00RKKUFK">Silk To Solder Mask (Clearance=5mil) (IsPad),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID4TD1VWELGOZFOSOVVW1G5NYWSECJVPPHOVWLRTIBDW4OUNVVWSFI">Silk to Silk (Clearance=10mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDHVDGIOGAJGOIGTDG5VQRQYW24PQKGUAPMP0TBUCTYO5RPHXAGLPM">Net Antennae (Tolerance=0mil) (All)</a></td>
+<td class="column2">19</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDQEV5KKM1HPKLKWGNNC4L4V5NDBWY3Y3CON4D30OONTVCI0UFX4HB">Board Clearance Constraint (Gap=0mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDAKNJ3PMKBTY4G13TNHCTPAVRUBUCFJX3NA4XHDHJXQDT13UKUN2O">Height Constraint (Min=0mil) (Max=2000mil) (Prefered=500mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">105</td>
+</tr>
+</table><br><a name="IDT2RP3225XK4LNDBLXKSSPHTO4FMRRPYJVLFUUUMBX3MIQBWTTCSO"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Clearance Constraint (Gap=5mil) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2351.452mil|Location2.X=2362.452mil|Location1.Y=754.5mil|Location2.Y=765.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2351.452mil|Location2.X=2362.452mil|Location1.Y=754.5mil|Location2.Y=765.5mil|Absolute=True">Clearance Constraint: (Collision &lt; 15mil) Between Pad J11-1(2430mil,760mil) on Multi-Layer And Polygon Region (27 hole(s)) Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2333.918mil|Location2.X=2344.918mil|Location1.Y=755.428mil|Location2.Y=766.428mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2333.918mil|Location2.X=2344.918mil|Location1.Y=755.428mil|Location2.Y=766.428mil|Absolute=True">Clearance Constraint: (Collision &lt; 15mil) Between Pad J11-1(2430mil,760mil) on Multi-Layer And Polygon Region (29 hole(s)) Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2342.5mil|Location2.X=2353.5mil|Location1.Y=754.5mil|Location2.Y=765.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2342.5mil|Location2.X=2353.5mil|Location1.Y=754.5mil|Location2.Y=765.5mil|Absolute=True">Clearance Constraint: (Collision &lt; 15mil) Between Pad J11-1(2430mil,760mil) on Multi-Layer And Polygon Region (30 hole(s)) Int2 (PWR) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2333.918mil|Location2.X=2344.918mil|Location1.Y=755.428mil|Location2.Y=766.428mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2333.918mil|Location2.X=2344.918mil|Location1.Y=755.428mil|Location2.Y=766.428mil|Absolute=True">Clearance Constraint: (Collision &lt; 15mil) Between Pad J11-1(2430mil,760mil) on Multi-Layer And Polygon Region (33 hole(s)) Int1 (GND) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2782.067mil|Location2.X=2793.067mil|Location1.Y=659.856mil|Location2.Y=670.856mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2782.067mil|Location2.X=2793.067mil|Location1.Y=659.856mil|Location2.Y=670.856mil|Absolute=True">Clearance Constraint: (Collision &lt; 15mil) Between Pad J11-2(2724mil,760mil) on Multi-Layer And Polygon Region (29 hole(s)) Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2775.754mil|Location2.X=2792.004mil|Location1.Y=647.724mil|Location2.Y=663.974mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2775.754mil|Location2.X=2792.004mil|Location1.Y=647.724mil|Location2.Y=663.974mil|Absolute=True">Clearance Constraint: (5.303mil &lt; 15mil) Between Pad J11-2(2724mil,760mil) on Multi-Layer And Polygon Region (29 hole(s)) Int2 (PWR) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2775.754mil|Location2.X=2792.004mil|Location1.Y=647.724mil|Location2.Y=663.974mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2775.754mil|Location2.X=2792.004mil|Location1.Y=647.724mil|Location2.Y=663.974mil|Absolute=True">Clearance Constraint: (5.303mil &lt; 15mil) Between Pad J11-2(2724mil,760mil) on Multi-Layer And Polygon Region (29 hole(s)) Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2655.996mil|Location2.X=2672.246mil|Location1.Y=647.724mil|Location2.Y=663.974mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2655.996mil|Location2.X=2672.246mil|Location1.Y=647.724mil|Location2.Y=663.974mil|Absolute=True">Clearance Constraint: (5.303mil &lt; 15mil) Between Pad J11-2(2724mil,760mil) on Multi-Layer And Polygon Region (339 hole(s)) Int1 (GND) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=493.585mil|Location2.X=499.919mil|Location1.Y=3626.723mil|Location2.Y=3633.056mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=493.585mil|Location2.X=499.919mil|Location1.Y=3626.723mil|Location2.Y=3633.056mil|Absolute=True">Clearance Constraint: (Collision &lt; 8mil) Between Pad J13-2(496.752mil,3629.89mil) on Multi-Layer And Track (496.752mil,3629.89mil)(546.346mil,3580.295mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=493.585mil|Location2.X=499.919mil|Location1.Y=3626.723mil|Location2.Y=3633.056mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=493.585mil|Location2.X=499.919mil|Location1.Y=3626.723mil|Location2.Y=3633.056mil|Absolute=True">Clearance Constraint: (Collision &lt; 8mil) Between Pad J13-2(496.752mil,3629.89mil) on Multi-Layer And Track (496.752mil,3629.89mil)(954.89mil,3629.89mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=493.585mil|Location2.X=499.919mil|Location1.Y=3075.969mil|Location2.Y=3082.302mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=493.585mil|Location2.X=499.919mil|Location1.Y=3075.969mil|Location2.Y=3082.302mil|Absolute=True">Clearance Constraint: (Collision &lt; 8mil) Between Pad J14-2(496.752mil,3079.135mil) on Multi-Layer And Track (496.752mil,3079.135mil)(546.346mil,3128.73mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=493.585mil|Location2.X=499.919mil|Location1.Y=1738.705mil|Location2.Y=1745.038mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=493.585mil|Location2.X=499.919mil|Location1.Y=1738.705mil|Location2.Y=1745.038mil|Absolute=True">Clearance Constraint: (Collision &lt; 8mil) Between Pad J16-2(496.752mil,1741.872mil) on Multi-Layer And Track (496.752mil,1608.248mil)(496.752mil,1741.872mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=493.585mil|Location2.X=499.919mil|Location1.Y=1187.951mil|Location2.Y=1194.284mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=493.585mil|Location2.X=499.919mil|Location1.Y=1187.951mil|Location2.Y=1194.284mil|Absolute=True">Clearance Constraint: (Collision &lt; 8mil) Between Pad J17-2(496.752mil,1191.117mil) on Multi-Layer And Track (496.752mil,1191.117mil)(735mil,1429.365mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6851.755mil|Location2.X=6858.088mil|Location1.Y=3014.944mil|Location2.Y=3021.277mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6851.755mil|Location2.X=6858.088mil|Location1.Y=3014.944mil|Location2.Y=3021.277mil|Absolute=True">Clearance Constraint: (Collision &lt; 8mil) Between Pad J18-1(6854.921mil,3018.11mil) on Multi-Layer And Track (6806.335mil,2969.524mil)(6854.921mil,3018.11mil) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6733.644mil|Location2.X=6739.978mil|Location1.Y=3014.944mil|Location2.Y=3021.277mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6733.644mil|Location2.X=6739.978mil|Location1.Y=3014.944mil|Location2.Y=3021.277mil|Absolute=True">Clearance Constraint: (Collision &lt; 8mil) Between Pad J18-2(6736.811mil,3018.11mil) on Multi-Layer And Track (5878.11mil,3018.11mil)(6736.811mil,3018.11mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6733.644mil|Location2.X=6739.978mil|Location1.Y=2896.833mil|Location2.Y=2903.167mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6733.644mil|Location2.X=6739.978mil|Location1.Y=2896.833mil|Location2.Y=2903.167mil|Absolute=True">Clearance Constraint: (Collision &lt; 8mil) Between Pad J18-4(6736.811mil,2900mil) on Multi-Layer And Track (6445mil,2900mil)(6736.811mil,2900mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6735.081mil|Location2.X=6741.415mil|Location1.Y=3520.889mil|Location2.Y=3527.222mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6735.081mil|Location2.X=6741.415mil|Location1.Y=3520.889mil|Location2.Y=3527.222mil|Absolute=True">Clearance Constraint: (Collision &lt; 8mil) Between Pad J4-2(6738.248mil,3524.055mil) on Multi-Layer And Track (6385mil,3524.055mil)(6738.248mil,3524.055mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6735.081mil|Location2.X=6741.415mil|Location1.Y=4041.833mil|Location2.Y=4048.167mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6735.081mil|Location2.X=6741.415mil|Location1.Y=4041.833mil|Location2.Y=4048.167mil|Absolute=True">Clearance Constraint: (Collision &lt; 8mil) Between Pad J5-2(6738.248mil,4045mil) on Multi-Layer And Track (6531.462mil,4045mil)(6738.248mil,4045mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6735.081mil|Location2.X=6741.415mil|Location1.Y=4519.89mil|Location2.Y=4526.223mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6735.081mil|Location2.X=6741.415mil|Location1.Y=4519.89mil|Location2.Y=4526.223mil|Absolute=True">Clearance Constraint: (Collision &lt; 8mil) Between Pad J6-2(6738.248mil,4534.055mil) on Multi-Layer And Track (6410mil,4205.404mil)(6738.248mil,4533.652mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6735.081mil|Location2.X=6741.415mil|Location1.Y=4530.889mil|Location2.Y=4537.222mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6735.081mil|Location2.X=6741.415mil|Location1.Y=4530.889mil|Location2.Y=4537.222mil|Absolute=True">Clearance Constraint: (Collision &lt; 8mil) Between Pad J6-2(6738.248mil,4534.055mil) on Multi-Layer And Track (6738.248mil,4533.652mil)(6738.248mil,4534.055mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=376.912mil|Location2.X=383.245mil|Location1.Y=4183.723mil|Location2.Y=4190.056mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=376.912mil|Location2.X=383.245mil|Location1.Y=4183.723mil|Location2.Y=4190.056mil|Absolute=True">Clearance Constraint: (Collision &lt; 8mil) Between Pad J7-1(380.079mil,4186.89mil) on Multi-Layer And Track (380.079mil,4186.89mil)(430.165mil,4236.976mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=495.022mil|Location2.X=501.356mil|Location1.Y=4183.723mil|Location2.Y=4190.056mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=495.022mil|Location2.X=501.356mil|Location1.Y=4183.723mil|Location2.Y=4190.056mil|Absolute=True">Clearance Constraint: (Collision &lt; 8mil) Between Pad J7-2(498.189mil,4186.89mil) on Multi-Layer And Track (498.189mil,4186.89mil)(827.037mil,4186.89mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=376.912mil|Location2.X=383.245mil|Location1.Y=4301.833mil|Location2.Y=4308.167mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=376.912mil|Location2.X=383.245mil|Location1.Y=4301.833mil|Location2.Y=4308.167mil|Absolute=True">Clearance Constraint: (Collision &lt; 8mil) Between Pad J7-3(380.079mil,4305mil) on Multi-Layer And Track (380.079mil,4305mil)(440.276mil,4365.197mil) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=495.022mil|Location2.X=501.356mil|Location1.Y=4301.833mil|Location2.Y=4308.167mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=495.022mil|Location2.X=501.356mil|Location1.Y=4301.833mil|Location2.Y=4308.167mil|Absolute=True">Clearance Constraint: (Collision &lt; 8mil) Between Pad J7-4(498.189mil,4305mil) on Multi-Layer And Track (498.189mil,4305mil)(501.963mil,4301.226mil) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=505.602mil|Location2.X=511.935mil|Location1.Y=4291.254mil|Location2.Y=4297.587mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=505.602mil|Location2.X=511.935mil|Location1.Y=4291.254mil|Location2.Y=4297.587mil|Absolute=True">Clearance Constraint: (Collision &lt; 8mil) Between Pad J7-4(498.189mil,4305mil) on Multi-Layer And Track (501.963mil,4250.413mil)(501.963mil,4301.226mil) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=376.912mil|Location2.X=383.245mil|Location1.Y=4419.944mil|Location2.Y=4426.277mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=376.912mil|Location2.X=383.245mil|Location1.Y=4419.944mil|Location2.Y=4426.277mil|Absolute=True">Clearance Constraint: (Collision &lt; 8mil) Between Pad J7-5(380.079mil,4423.11mil) on Multi-Layer And Track (380.079mil,4423.11mil)(432.665mil,4475.697mil) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=376.912mil|Location2.X=383.245mil|Location1.Y=603.723mil|Location2.Y=610.056mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=376.912mil|Location2.X=383.245mil|Location1.Y=603.723mil|Location2.Y=610.056mil|Absolute=True">Clearance Constraint: (Collision &lt; 8mil) Between Pad J8-1(380.079mil,606.89mil) on Multi-Layer And Track (380.079mil,606.89mil)(432.665mil,659.476mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=495.022mil|Location2.X=501.356mil|Location1.Y=603.723mil|Location2.Y=610.056mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=495.022mil|Location2.X=501.356mil|Location1.Y=603.723mil|Location2.Y=610.056mil|Absolute=True">Clearance Constraint: (Collision &lt; 8mil) Between Pad J8-2(498.189mil,606.89mil) on Multi-Layer And Track (498.189mil,606.89mil)(756.89mil,606.89mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=376.912mil|Location2.X=383.245mil|Location1.Y=721.833mil|Location2.Y=728.167mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=376.912mil|Location2.X=383.245mil|Location1.Y=721.833mil|Location2.Y=728.167mil|Absolute=True">Clearance Constraint: (Collision &lt; 8mil) Between Pad J8-3(380.079mil,725mil) on Multi-Layer And Track (380.079mil,725mil)(430.165mil,674.913mil) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=495.022mil|Location2.X=501.356mil|Location1.Y=721.833mil|Location2.Y=728.167mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=495.022mil|Location2.X=501.356mil|Location1.Y=721.833mil|Location2.Y=728.167mil|Absolute=True">Clearance Constraint: (Collision &lt; 8mil) Between Pad J8-4(498.189mil,725mil) on Multi-Layer And Track (498.189mil,725mil)(930mil,1156.811mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=376.912mil|Location2.X=383.245mil|Location1.Y=839.944mil|Location2.Y=846.277mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=376.912mil|Location2.X=383.245mil|Location1.Y=839.944mil|Location2.Y=846.277mil|Absolute=True">Clearance Constraint: (Collision &lt; 8mil) Between Pad J8-5(380.079mil,843.11mil) on Multi-Layer And Track (380.079mil,843.11mil)(471.969mil,935mil) on Bottom Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID4QY4EBPWDMRTGIFN2PQEVN24JHRUPSZMLSCSGLDKYE5G5R01ZJ1E"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Short-Circuit Constraint (Allowed=No) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True">Short-Circuit Constraint: Between Pad J11-1(2430mil,760mil) on Multi-Layer And Polygon Region (27 hole(s)) Bottom Layer Location : [X = 0mil][Y = 0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True">Short-Circuit Constraint: Between Pad J11-1(2430mil,760mil) on Multi-Layer And Polygon Region (29 hole(s)) Top Layer Location : [X = 0mil][Y = 0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True">Short-Circuit Constraint: Between Pad J11-1(2430mil,760mil) on Multi-Layer And Polygon Region (30 hole(s)) Int2 (PWR) Location : [X = 0mil][Y = 0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True">Short-Circuit Constraint: Between Pad J11-1(2430mil,760mil) on Multi-Layer And Polygon Region (33 hole(s)) Int1 (GND) Location : [X = 0mil][Y = 0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True">Short-Circuit Constraint: Between Pad J11-2(2724mil,760mil) on Multi-Layer And Polygon Region (29 hole(s)) Bottom Layer Location : [X = 0mil][Y = 0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True">Short-Circuit Constraint: Between Pad J11-2(2724mil,760mil) on Multi-Layer And Polygon Region (29 hole(s)) Int2 (PWR) Location : [X = 0mil][Y = 0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True">Short-Circuit Constraint: Between Pad J11-2(2724mil,760mil) on Multi-Layer And Polygon Region (29 hole(s)) Top Layer Location : [X = 0mil][Y = 0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True">Short-Circuit Constraint: Between Pad J11-2(2724mil,760mil) on Multi-Layer And Polygon Region (339 hole(s)) Int1 (GND) Location : [X = 0mil][Y = 0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=477.203mil|Location2.X=534.574mil|Location1.Y=3592.068mil|Location2.Y=3649.438mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=477.203mil|Location2.X=534.574mil|Location1.Y=3592.068mil|Location2.Y=3649.438mil|Absolute=True">Short-Circuit Constraint: Between Pad J13-2(496.752mil,3629.89mil) on Multi-Layer And Track (496.752mil,3629.89mil)(546.346mil,3580.295mil) on Top Layer Location : [X = 505.889mil][Y = 3620.753mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=482.858mil|Location2.X=532.252mil|Location1.Y=3605.193mil|Location2.Y=3654.586mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=482.858mil|Location2.X=532.252mil|Location1.Y=3605.193mil|Location2.Y=3654.586mil|Absolute=True">Short-Circuit Constraint: Between Pad J13-2(496.752mil,3629.89mil) on Multi-Layer And Track (496.752mil,3629.89mil)(954.89mil,3629.89mil) on Top Layer Location : [X = 507.555mil][Y = 3629.89mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=477.203mil|Location2.X=534.574mil|Location1.Y=3059.587mil|Location2.Y=3116.957mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=477.203mil|Location2.X=534.574mil|Location1.Y=3059.587mil|Location2.Y=3116.957mil|Absolute=True">Short-Circuit Constraint: Between Pad J14-2(496.752mil,3079.135mil) on Multi-Layer And Track (496.752mil,3079.135mil)(546.346mil,3128.73mil) on Top Layer Location : [X = 505.889mil][Y = 3088.272mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=474.216mil|Location2.X=519.288mil|Location1.Y=1707.272mil|Location2.Y=1752.344mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=474.216mil|Location2.X=519.288mil|Location1.Y=1707.272mil|Location2.Y=1752.344mil|Absolute=True">Short-Circuit Constraint: Between Pad J16-2(496.752mil,1741.872mil) on Multi-Layer And Track (496.752mil,1608.248mil)(496.752mil,1741.872mil) on Top Layer Location : [X = 496.752mil][Y = 1729.808mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=480.52mil|Location2.X=532.459mil|Location1.Y=1174.886mil|Location2.Y=1226.824mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=480.52mil|Location2.X=532.459mil|Location1.Y=1174.886mil|Location2.Y=1226.824mil|Absolute=True">Short-Circuit Constraint: Between Pad J17-2(496.752mil,1191.117mil) on Multi-Layer And Track (496.752mil,1191.117mil)(735mil,1429.365mil) on Top Layer Location : [X = 506.49mil][Y = 1200.855mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6817.919mil|Location2.X=6872.557mil|Location1.Y=2981.108mil|Location2.Y=3035.745mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6817.919mil|Location2.X=6872.557mil|Location1.Y=2981.108mil|Location2.Y=3035.745mil|Absolute=True">Short-Circuit Constraint: Between Pad J18-1(6854.921mil,3018.11mil) on Multi-Layer And Track (6806.335mil,2969.524mil)(6854.921mil,3018.11mil) on Bottom Layer Location : [X = 6845.238mil][Y = 3008.427mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6701.568mil|Location2.X=6747.937mil|Location1.Y=2994.926mil|Location2.Y=3041.295mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6701.568mil|Location2.X=6747.937mil|Location1.Y=2994.926mil|Location2.Y=3041.295mil|Absolute=True">Short-Circuit Constraint: Between Pad J18-2(6736.811mil,3018.11mil) on Multi-Layer And Track (5878.11mil,3018.11mil)(6736.811mil,3018.11mil) on Top Layer Location : [X = 6724.753mil][Y = 3018.11mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6700.842mil|Location2.X=6750.681mil|Location1.Y=2875.081mil|Location2.Y=2924.919mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6700.842mil|Location2.X=6750.681mil|Location1.Y=2875.081mil|Location2.Y=2924.919mil|Absolute=True">Short-Circuit Constraint: Between Pad J18-4(6736.811mil,2900mil) on Multi-Layer And Track (6445mil,2900mil)(6736.811mil,2900mil) on Top Layer Location : [X = 6725.761mil][Y = 2900mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6702.748mil|Location2.X=6752.142mil|Location1.Y=3499.358mil|Location2.Y=3548.752mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6702.748mil|Location2.X=6752.142mil|Location1.Y=3499.358mil|Location2.Y=3548.752mil|Absolute=True">Short-Circuit Constraint: Between Pad J4-2(6738.248mil,3524.055mil) on Multi-Layer And Track (6385mil,3524.055mil)(6738.248mil,3524.055mil) on Top Layer Location : [X = 6727.445mil][Y = 3524.055mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6702.748mil|Location2.X=6752.142mil|Location1.Y=4020.303mil|Location2.Y=4069.697mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6702.748mil|Location2.X=6752.142mil|Location1.Y=4020.303mil|Location2.Y=4069.697mil|Absolute=True">Short-Circuit Constraint: Between Pad J5-2(6738.248mil,4045mil) on Multi-Layer And Track (6531.462mil,4045mil)(6738.248mil,4045mil) on Top Layer Location : [X = 6727.445mil][Y = 4045mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6700.628mil|Location2.X=6757.713mil|Location1.Y=4496.115mil|Location2.Y=4553.2mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6700.628mil|Location2.X=6757.713mil|Location1.Y=4496.115mil|Location2.Y=4553.2mil|Absolute=True">Short-Circuit Constraint: Between Pad J6-2(6738.248mil,4534.055mil) on Multi-Layer And Track (6410mil,4205.404mil)(6738.248mil,4533.652mil) on Top Layer Location : [X = 6729.171mil][Y = 4524.658mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6722.341mil|Location2.X=6754.155mil|Location1.Y=4517.946mil|Location2.Y=4549.761mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6722.341mil|Location2.X=6754.155mil|Location1.Y=4517.946mil|Location2.Y=4549.761mil|Absolute=True">Short-Circuit Constraint: Between Pad J6-2(6738.248mil,4534.055mil) on Multi-Layer And Track (6738.248mil,4533.652mil)(6738.248mil,4534.055mil) on Top Layer Location : [X = 6738.248mil][Y = 4533.853mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=360.452mil|Location2.X=418.355mil|Location1.Y=4167.263mil|Location2.Y=4225.166mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=360.452mil|Location2.X=418.355mil|Location1.Y=4167.263mil|Location2.Y=4225.166mil|Absolute=True">Short-Circuit Constraint: Between Pad J7-1(380.079mil,4186.89mil) on Multi-Layer And Track (380.079mil,4186.89mil)(430.165mil,4236.976mil) on Top Layer Location : [X = 389.404mil][Y = 4196.215mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=484.319mil|Location2.X=534.158mil|Location1.Y=4161.971mil|Location2.Y=4211.809mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=484.319mil|Location2.X=534.158mil|Location1.Y=4161.971mil|Location2.Y=4211.809mil|Absolute=True">Short-Circuit Constraint: Between Pad J7-2(498.189mil,4186.89mil) on Multi-Layer And Track (498.189mil,4186.89mil)(827.037mil,4186.89mil) on Top Layer Location : [X = 509.239mil][Y = 4186.89mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=357.192mil|Location2.X=420.138mil|Location1.Y=4282.113mil|Location2.Y=4345.059mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=357.192mil|Location2.X=420.138mil|Location1.Y=4282.113mil|Location2.Y=4345.059mil|Absolute=True">Short-Circuit Constraint: Between Pad J7-3(380.079mil,4305mil) on Multi-Layer And Track (380.079mil,4305mil)(440.276mil,4365.197mil) on Bottom Layer Location : [X = 388.665mil][Y = 4313.586mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=485.209mil|Location2.X=514.943mil|Location1.Y=4288.246mil|Location2.Y=4317.98mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=485.209mil|Location2.X=514.943mil|Location1.Y=4288.246mil|Location2.Y=4317.98mil|Absolute=True">Short-Circuit Constraint: Between Pad J7-4(498.189mil,4305mil) on Multi-Layer And Track (498.189mil,4305mil)(501.963mil,4301.226mil) on Bottom Layer Location : [X = 500.076mil][Y = 4303.113mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=480.949mil|Location2.X=522.977mil|Location1.Y=4269.788mil|Location2.Y=4311.816mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=480.949mil|Location2.X=522.977mil|Location1.Y=4269.788mil|Location2.Y=4311.816mil|Absolute=True">Short-Circuit Constraint: Between Pad J7-4(498.189mil,4305mil) on Multi-Layer And Track (501.963mil,4250.413mil)(501.963mil,4301.226mil) on Bottom Layer Location : [X = 501.963mil][Y = 4290.802mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=357.192mil|Location2.X=420.138mil|Location1.Y=4400.223mil|Location2.Y=4463.169mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=357.192mil|Location2.X=420.138mil|Location1.Y=4400.223mil|Location2.Y=4463.169mil|Absolute=True">Short-Circuit Constraint: Between Pad J7-5(380.079mil,4423.11mil) on Multi-Layer And Track (380.079mil,4423.11mil)(432.665mil,4475.697mil) on Bottom Layer Location : [X = 388.665mil][Y = 4431.696mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=357.192mil|Location2.X=420.138mil|Location1.Y=584.003mil|Location2.Y=646.949mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=357.192mil|Location2.X=420.138mil|Location1.Y=584.003mil|Location2.Y=646.949mil|Absolute=True">Short-Circuit Constraint: Between Pad J8-1(380.079mil,606.89mil) on Multi-Layer And Track (380.079mil,606.89mil)(432.665mil,659.476mil) on Top Layer Location : [X = 388.665mil][Y = 615.476mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=462.115mil|Location2.X=541.328mil|Location1.Y=567.284mil|Location2.Y=646.496mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=462.115mil|Location2.X=541.328mil|Location1.Y=567.284mil|Location2.Y=646.496mil|Absolute=True">Short-Circuit Constraint: Between Pad J8-2(498.189mil,606.89mil) on Multi-Layer And Track (498.189mil,606.89mil)(756.89mil,606.89mil) on Top Layer Location : [X = 501.721mil][Y = 606.89mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=360.452mil|Location2.X=418.355mil|Location1.Y=686.724mil|Location2.Y=744.627mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=360.452mil|Location2.X=418.355mil|Location1.Y=686.724mil|Location2.Y=744.627mil|Absolute=True">Short-Circuit Constraint: Between Pad J8-3(380.079mil,725mil) on Multi-Layer And Track (380.079mil,725mil)(430.165mil,674.913mil) on Bottom Layer Location : [X = 389.404mil][Y = 715.675mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=459.699mil|Location2.X=543.743mil|Location1.Y=686.51mil|Location2.Y=770.554mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=459.699mil|Location2.X=543.743mil|Location1.Y=686.51mil|Location2.Y=770.554mil|Absolute=True">Short-Circuit Constraint: Between Pad J8-4(498.189mil,725mil) on Multi-Layer And Track (498.189mil,725mil)(930mil,1156.811mil) on Top Layer Location : [X = 501.721mil][Y = 728.532mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=360.452mil|Location2.X=418.355mil|Location1.Y=823.484mil|Location2.Y=881.386mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=360.452mil|Location2.X=418.355mil|Location1.Y=823.484mil|Location2.Y=881.386mil|Absolute=True">Short-Circuit Constraint: Between Pad J8-5(380.079mil,843.11mil) on Multi-Layer And Track (380.079mil,843.11mil)(471.969mil,935mil) on Bottom Layer Location : [X = 389.404mil][Y = 852.435mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDGE2V5FXVJXDENDY0Q0QNODZIQH5SO555E054FMDPKR2MEMVWRTEL"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Un-Routed Net Constraint ( (All) )</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2386mil|Location2.X=2777.5mil|Location1.Y=624.5mil|Location2.Y=1169mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2386mil|Location2.X=2777.5mil|Location1.Y=624.5mil|Location2.Y=1169mil|Absolute=True">Un-Routed Net Constraint: Net +24 Between Pad +24-1(2420mil,1135mil) on Multi-Layer And Pad J11-2(2724mil,760mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1936mil|Location2.X=2483.5mil|Location1.Y=461mil|Location2.Y=895.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1936mil|Location2.X=2483.5mil|Location1.Y=461mil|Location2.Y=895.5mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad VR1-2(1970mil,495mil) on Multi-Layer And Pad J11-1(2430mil,760mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=343.047mil|Location2.X=414.236mil|Location1.Y=3161.651mil|Location2.Y=3783.594mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=343.047mil|Location2.X=414.236mil|Location1.Y=3161.651mil|Location2.Y=3783.594mil|Absolute=True">Un-Routed Net Constraint: Net CAN_H Between Pad J14-3(378.642mil,3197.245mil) on Multi-Layer And Pad J13-3(378.642mil,3748mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=278.642mil|Location2.X=596.752mil|Location1.Y=3097.245mil|Location2.Y=3179.135mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=278.642mil|Location2.X=596.752mil|Location1.Y=3097.245mil|Location2.Y=3179.135mil|Absolute=True">Un-Routed Net Constraint: Net CAN_H Between Pad J14-3(378.642mil,3197.245mil) on Multi-Layer And Track (496.752mil,3079.135mil)(546.346mil,3128.73mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=278.642mil|Location2.X=596.752mil|Location1.Y=1759.982mil|Location2.Y=1841.872mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=278.642mil|Location2.X=596.752mil|Location1.Y=1759.982mil|Location2.Y=1841.872mil|Absolute=True">Un-Routed Net Constraint: Net Soil_a Between Pad J16-3(378.642mil,1859.982mil) on Multi-Layer And Track (496.752mil,1608.248mil)(496.752mil,1741.872mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=278.642mil|Location2.X=596.752mil|Location1.Y=1209.227mil|Location2.Y=1291.117mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=278.642mil|Location2.X=596.752mil|Location1.Y=1209.227mil|Location2.Y=1291.117mil|Absolute=True">Un-Routed Net Constraint: Net GAS_a Between Pad J17-3(378.642mil,1309.227mil) on Multi-Layer And Track (496.752mil,1191.117mil)(735mil,1429.365mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6754.921mil|Location2.X=6954.921mil|Location1.Y=2800mil|Location2.Y=3118.11mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6754.921mil|Location2.X=6954.921mil|Location1.Y=2800mil|Location2.Y=3118.11mil|Absolute=True">Un-Routed Net Constraint: Net BUS_SCL Between Pad J18-3(6854.921mil,2900mil) on Multi-Layer And Track (6806.335mil,2969.524mil)(6854.921mil,3018.11mil) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6636.811mil|Location2.X=6836.811mil|Location1.Y=2800mil|Location2.Y=3118.11mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6636.811mil|Location2.X=6836.811mil|Location1.Y=2800mil|Location2.Y=3118.11mil|Absolute=True">Un-Routed Net Constraint: Net BUS_SDA Between Pad J18-4(6736.811mil,2900mil) on Multi-Layer And Track (5878.11mil,3018.11mil)(6736.811mil,3018.11mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6636.811mil|Location2.X=6954.921mil|Location1.Y=2800mil|Location2.Y=2881.89mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6636.811mil|Location2.X=6954.921mil|Location1.Y=2800mil|Location2.Y=2881.89mil|Absolute=True">Un-Routed Net Constraint: Net NetACK1_1 Between Track (6445mil,2900mil)(6736.811mil,2900mil) on Top Layer And Pad J18-5(6854.921mil,2781.89mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6638.248mil|Location2.X=6956.358mil|Location1.Y=3424.055mil|Location2.Y=3505.945mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6638.248mil|Location2.X=6956.358mil|Location1.Y=3424.055mil|Location2.Y=3505.945mil|Absolute=True">Un-Routed Net Constraint: Net NetJ4_3 Between Track (6385mil,3524.055mil)(6738.248mil,3524.055mil) on Top Layer And Pad J4-3(6856.358mil,3405.945mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6638.248mil|Location2.X=6956.358mil|Location1.Y=3945mil|Location2.Y=4026.89mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6638.248mil|Location2.X=6956.358mil|Location1.Y=3945mil|Location2.Y=4026.89mil|Absolute=True">Un-Routed Net Constraint: Net NetJ5_3 Between Track (6531.462mil,4045mil)(6738.248mil,4045mil) on Top Layer And Pad J5-3(6856.358mil,3926.89mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6638.248mil|Location2.X=6956.358mil|Location1.Y=4434.055mil|Location2.Y=4515.945mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6638.248mil|Location2.X=6956.358mil|Location1.Y=4434.055mil|Location2.Y=4515.945mil|Absolute=True">Un-Routed Net Constraint: Net NetJ6_3 Between Track (6738.248mil,4533.652mil)(6738.248mil,4534.055mil) on Top Layer And Pad J6-3(6856.358mil,4415.945mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=280.079mil|Location2.X=480.079mil|Location1.Y=4086.89mil|Location2.Y=4523.11mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=280.079mil|Location2.X=480.079mil|Location1.Y=4086.89mil|Location2.Y=4523.11mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J7-1(380.079mil,4186.89mil) on Multi-Layer And Track (380.079mil,4423.11mil)(432.665mil,4475.697mil) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=280.079mil|Location2.X=598.189mil|Location1.Y=4205mil|Location2.Y=4286.89mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=280.079mil|Location2.X=598.189mil|Location1.Y=4205mil|Location2.Y=4286.89mil|Absolute=True">Un-Routed Net Constraint: Net +5 Between Track (380.079mil,4305mil)(440.276mil,4365.197mil) on Bottom Layer And Pad J7-2(498.189mil,4186.89mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=280.079mil|Location2.X=480.079mil|Location1.Y=4086.89mil|Location2.Y=4405mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=280.079mil|Location2.X=480.079mil|Location1.Y=4086.89mil|Location2.Y=4405mil|Absolute=True">Un-Routed Net Constraint: Net NetENC2A_1 Between Track (380.079mil,4186.89mil)(430.165mil,4236.976mil) on Top Layer And Pad J7-3(380.079mil,4305mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=398.189mil|Location2.X=598.189mil|Location1.Y=4086.89mil|Location2.Y=4405mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=398.189mil|Location2.X=598.189mil|Location1.Y=4086.89mil|Location2.Y=4405mil|Absolute=True">Un-Routed Net Constraint: Net NetENC2B_1 Between Track (498.189mil,4186.89mil)(827.037mil,4186.89mil) on Top Layer And Pad J7-4(498.189mil,4305mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=280.079mil|Location2.X=598.189mil|Location1.Y=4323.11mil|Location2.Y=4405mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=280.079mil|Location2.X=598.189mil|Location1.Y=4323.11mil|Location2.Y=4405mil|Absolute=True">Un-Routed Net Constraint: Net NetJ7_5 Between Pad J7-5(380.079mil,4423.11mil) on Multi-Layer And Track (498.189mil,4305mil)(501.963mil,4301.226mil) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=280.079mil|Location2.X=480.079mil|Location1.Y=506.89mil|Location2.Y=943.11mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=280.079mil|Location2.X=480.079mil|Location1.Y=506.89mil|Location2.Y=943.11mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J8-1(380.079mil,606.89mil) on Multi-Layer And Track (380.079mil,843.11mil)(471.969mil,935mil) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=280.079mil|Location2.X=598.189mil|Location1.Y=625mil|Location2.Y=706.89mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=280.079mil|Location2.X=598.189mil|Location1.Y=625mil|Location2.Y=706.89mil|Absolute=True">Un-Routed Net Constraint: Net +5 Between Track (380.079mil,725mil)(430.165mil,674.913mil) on Bottom Layer And Pad J8-2(498.189mil,606.89mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=280.079mil|Location2.X=480.079mil|Location1.Y=506.89mil|Location2.Y=825mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=280.079mil|Location2.X=480.079mil|Location1.Y=506.89mil|Location2.Y=825mil|Absolute=True">Un-Routed Net Constraint: Net NetENC1A_1 Between Track (380.079mil,606.89mil)(432.665mil,659.476mil) on Top Layer And Pad J8-3(380.079mil,725mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=398.189mil|Location2.X=598.189mil|Location1.Y=506.89mil|Location2.Y=825mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=398.189mil|Location2.X=598.189mil|Location1.Y=506.89mil|Location2.Y=825mil|Absolute=True">Un-Routed Net Constraint: Net NetENC1B_1 Between Track (498.189mil,606.89mil)(756.89mil,606.89mil) on Top Layer And Pad J8-4(498.189mil,725mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=280.079mil|Location2.X=598.189mil|Location1.Y=743.11mil|Location2.Y=825mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=280.079mil|Location2.X=598.189mil|Location1.Y=743.11mil|Location2.Y=825mil|Absolute=True">Un-Routed Net Constraint: Net NetJ8_5 Between Pad J8-5(380.079mil,843.11mil) on Multi-Layer And Track (498.189mil,725mil)(930mil,1156.811mil) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDD2BVQ5GVHXSLOJUVAEDIECBDEBK3MIHU14QJSFNP0SYZ0D0N15XO"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Hole Size Constraint (Min=10mil) (Max=200mil) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2327.875mil|Location2.X=2532.125mil|Location1.Y=657.875mil|Location2.Y=862.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2327.875mil|Location2.X=2532.125mil|Location1.Y=657.875mil|Location2.Y=862.125mil|Absolute=True">Hole Size Constraint: (203mil &gt; 200mil) Pad J11-1(2430mil,760mil) on Multi-Layer Actual Slot Hole Height = 203mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2621.875mil|Location2.X=2826.125mil|Location1.Y=657.875mil|Location2.Y=862.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2621.875mil|Location2.X=2826.125mil|Location1.Y=657.875mil|Location2.Y=862.125mil|Absolute=True">Hole Size Constraint: (203mil &gt; 200mil) Pad J11-2(2724mil,760mil) on Multi-Layer Actual Slot Hole Height = 203mil</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDHVDGIOGAJGOIGTDG5VQRQYW24PQKGUAPMP0TBUCTYO5RPHXAGLPM"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Net Antennae (Tolerance=0mil) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=366.579mil|Location2.X=401.052mil|Location1.Y=4173.39mil|Location2.Y=4225.54mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=366.579mil|Location2.X=401.052mil|Location1.Y=4173.39mil|Location2.Y=4225.54mil|Absolute=True">Net Antennae: Track (380.079mil,4186.89mil)(430.165mil,4236.976mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=364.079mil|Location2.X=403.995mil|Location1.Y=4289mil|Location2.Y=4350.286mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=364.079mil|Location2.X=403.995mil|Location1.Y=4289mil|Location2.Y=4350.286mil|Absolute=True">Net Antennae: Track (380.079mil,4305mil)(440.276mil,4365.197mil) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=364.079mil|Location2.X=403.995mil|Location1.Y=4407.11mil|Location2.Y=4468.397mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=364.079mil|Location2.X=403.995mil|Location1.Y=4407.11mil|Location2.Y=4468.397mil|Absolute=True">Net Antennae: Track (380.079mil,4423.11mil)(432.665mil,4475.697mil) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=364.079mil|Location2.X=403.995mil|Location1.Y=590.89mil|Location2.Y=652.176mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=364.079mil|Location2.X=403.995mil|Location1.Y=590.89mil|Location2.Y=652.176mil|Absolute=True">Net Antennae: Track (380.079mil,606.89mil)(432.665mil,659.476mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=366.579mil|Location2.X=401.052mil|Location1.Y=711.5mil|Location2.Y=763.65mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=366.579mil|Location2.X=401.052mil|Location1.Y=711.5mil|Location2.Y=763.65mil|Absolute=True">Net Antennae: Track (380.079mil,725mil)(430.165mil,674.913mil) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=366.579mil|Location2.X=401.052mil|Location1.Y=829.61mil|Location2.Y=881.76mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=366.579mil|Location2.X=401.052mil|Location1.Y=829.61mil|Location2.Y=881.76mil|Absolute=True">Net Antennae: Track (380.079mil,843.11mil)(471.969mil,935mil) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=485.752mil|Location2.X=514.783mil|Location1.Y=1180.117mil|Location2.Y=1223.292mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=485.752mil|Location2.X=514.783mil|Location1.Y=1180.117mil|Location2.Y=1223.292mil|Absolute=True">Net Antennae: Track (496.752mil,1191.117mil)(735mil,1429.365mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=485.752mil|Location2.X=514.783mil|Location1.Y=1730.872mil|Location2.Y=1774.046mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=485.752mil|Location2.X=514.783mil|Location1.Y=1730.872mil|Location2.Y=1774.046mil|Absolute=True">Net Antennae: Track (496.752mil,1608.248mil)(496.752mil,1741.872mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=483.252mil|Location2.X=517.725mil|Location1.Y=3065.635mil|Location2.Y=3117.785mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=483.252mil|Location2.X=517.725mil|Location1.Y=3065.635mil|Location2.Y=3117.785mil|Absolute=True">Net Antennae: Track (496.752mil,3079.135mil)(546.346mil,3128.73mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=484.689mil|Location2.X=519.162mil|Location1.Y=4173.39mil|Location2.Y=4225.54mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=484.689mil|Location2.X=519.162mil|Location1.Y=4173.39mil|Location2.Y=4225.54mil|Absolute=True">Net Antennae: Track (498.189mil,4186.89mil)(827.037mil,4186.89mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=469.689mil|Location2.X=536.817mil|Location1.Y=578.39mil|Location2.Y=685.638mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=469.689mil|Location2.X=536.817mil|Location1.Y=578.39mil|Location2.Y=685.638mil|Absolute=True">Net Antennae: Track (498.189mil,606.89mil)(756.89mil,606.89mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=469.689mil|Location2.X=536.817mil|Location1.Y=696.5mil|Location2.Y=803.748mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=469.689mil|Location2.X=536.817mil|Location1.Y=696.5mil|Location2.Y=803.748mil|Absolute=True">Net Antennae: Track (498.189mil,725mil)(930mil,1156.811mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=490.963mil|Location2.X=519.994mil|Location1.Y=4290.226mil|Location2.Y=4333.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=490.963mil|Location2.X=519.994mil|Location1.Y=4290.226mil|Location2.Y=4333.401mil|Absolute=True">Net Antennae: Track (501.963mil,4250.413mil)(501.963mil,4301.226mil) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6725.311mil|Location2.X=6755.431mil|Location1.Y=3006.61mil|Location2.Y=3051.58mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6725.311mil|Location2.X=6755.431mil|Location1.Y=3006.61mil|Location2.Y=3051.58mil|Absolute=True">Net Antennae: Track (5878.11mil,3018.11mil)(6736.811mil,3018.11mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6724.748mil|Location2.X=6759.221mil|Location1.Y=3510.555mil|Location2.Y=3562.705mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6724.748mil|Location2.X=6759.221mil|Location1.Y=3510.555mil|Location2.Y=3562.705mil|Absolute=True">Net Antennae: Track (6385mil,3524.055mil)(6738.248mil,3524.055mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6724.748mil|Location2.X=6759.221mil|Location1.Y=4520.152mil|Location2.Y=4572.302mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6724.748mil|Location2.X=6759.221mil|Location1.Y=4520.152mil|Location2.Y=4572.302mil|Absolute=True">Net Antennae: Track (6410mil,4205.404mil)(6738.248mil,4533.652mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6723.311mil|Location2.X=6757.784mil|Location1.Y=2886.5mil|Location2.Y=2938.65mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6723.311mil|Location2.X=6757.784mil|Location1.Y=2886.5mil|Location2.Y=2938.65mil|Absolute=True">Net Antennae: Track (6445mil,2900mil)(6736.811mil,2900mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6724.748mil|Location2.X=6759.221mil|Location1.Y=4031.5mil|Location2.Y=4083.65mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6724.748mil|Location2.X=6759.221mil|Location1.Y=4031.5mil|Location2.Y=4083.65mil|Absolute=True">Net Antennae: Track (6531.462mil,4045mil)(6738.248mil,4045mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6842.921mil|Location2.X=6874.129mil|Location1.Y=3006.11mil|Location2.Y=3052.875mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Science_Sensor_A_EM_CG - Copy\Science_Sensor_A_EM_CG_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6842.921mil|Location2.X=6874.129mil|Location1.Y=3006.11mil|Location2.Y=3052.875mil|Absolute=True">Net Antennae: Track (6806.335mil,2969.524mil)(6854.921mil,3018.11mil) on Bottom Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
